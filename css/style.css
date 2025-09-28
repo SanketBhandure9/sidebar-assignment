@@ -1,10 +1,12 @@
 :root {
   --bg: #ffffff;
   --panel: #0f0f0f;
-  --muted: #8b8b8b;
-  --hover: #262626;
-  --active: #ffffff;
+  --muted: #747474;
+  --hover: #bababa;
+  --active: #282828;
   --accent: #2b2b2b;
+  /* --text: #c3c3c3; */
+  --text: #a6a6a6;
   --radius: 12px;
   --transition: 200ms;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
@@ -32,18 +34,22 @@ body {
   align-items: flex-start;
   width: 360px; /* visual container width */
   border-radius: var(--radius);
+  height: 100vh;
 }
 
 /* main menu (left narrow vertical) */
 .main-menu {
   background: var(--panel);
   width: 56px;
+  height: 100%;
+  height: 100%;
   padding: 10px 6px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.06);
 }
 .main-menu .group {
   display: flex;
@@ -51,7 +57,8 @@ body {
   gap: 8px;
   align-items: center;
 }
-.mm-btn {
+.mm-btn,
+.mm-btn-first {
   width: 40px;
   height: 40px;
   border-radius: 8px;
@@ -62,22 +69,18 @@ body {
   border: 0;
   color: var(--muted);
   cursor: pointer;
-  transition: background var(--transition), color var(--transition),
-    transform 140ms;
-  outline: none;
 }
-.mm-btn.disabled {
+.disabled {
   cursor: default;
-  opacity: 0.8;
+  color: #ffffff;
 }
 .mm-btn:hover {
-  background: var(--hover);
-  color: var(--active);
-  transform: translateY(-1px);
+  background: var(--active);
+  color: var(--text);
 }
 .mm-btn.active {
   background: var(--active);
-  color: #0a0a0a;
+  color: var(--text);
 }
 .mm-btn:focus {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
@@ -94,15 +97,40 @@ body {
 .sub-menu {
   background: var(--panel);
   width: 260px;
-  min-height: 560px;
-  /* border-radius: var(--radius); */
+  height: 100%;
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   transition: width var(--transition);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  scrollbar-color: transparent transparent;
 }
+
+/* Hide scrollbar for Webkit browsers */
+.sub-menu::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+.sub-menu::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.sub-menu::-webkit-scrollbar {
+  width: 8px;
+}
+.sub-menu::-webkit-scrollbar-thumb {
+  background: #2a6df5;
+  border-radius: 8px;
+}
+.sub-menu::-webkit-scrollbar-track {
+  background: #181818;
+  border-radius: 8px;
+}
+
 .sub-menu.collapsed {
   width: 64px;
   padding: 10px 8px;
@@ -164,20 +192,15 @@ body {
   gap: 10px;
   padding: 10px;
   border-radius: 8px;
-  color: var(--muted);
+  color: var(--text);
   cursor: pointer;
   transition: background var(--transition), color var(--transition),
     transform 100ms;
   user-select: none;
 }
 .nav-item:hover {
-  background: var(--hover);
-  color: var(--active);
-  transform: translateY(-1px);
-}
-.nav-item.active {
-  background: #202020;
-  color: var(--active);
+  background: var(--active);
+  color: var(--text);
 }
 .nav-item .icon {
   width: 18px;
@@ -209,7 +232,7 @@ body {
 .submenu-list .sub-link {
   padding: 8px 10px;
   border-radius: 8px;
-  color: var(--muted);
+  color: var(--text);
   cursor: pointer;
   font-size: 13px;
 }

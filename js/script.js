@@ -5,9 +5,8 @@ const MENU_DATA = {
       {
         label: "Dashboard Types",
         items: [
-          { icon: "👁️", text: "Overview" },
           {
-            icon: "📊",
+            icon: "<i class='fa-solid fa-table-list'></i>",
             text: "Executive Summary",
             children: [
               "Revenue Overview",
@@ -17,7 +16,7 @@ const MENU_DATA = {
             ],
           },
           {
-            icon: "🛠️",
+            icon: "<i class='fa-brands fa-centos'></i>",
             text: "Operations Dashboard",
             children: [
               "Project Timeline",
@@ -27,7 +26,7 @@ const MENU_DATA = {
             ],
           },
           {
-            icon: "💹",
+            icon: "<i class='fa-solid fa-coins'></i>",
             text: "Financial Dashboard",
             children: [
               "Budget vs Actual",
@@ -41,17 +40,29 @@ const MENU_DATA = {
       {
         label: "Report Summaries",
         items: [
-          { icon: "📁", text: "Weekly Reports" },
-          { icon: "⭐", text: "Monthly Insights" },
-          { icon: "👁", text: "Quarterly Analysis" },
+          {
+            icon: "<i class='fa-brands fa-weebly'></i>",
+            text: "Weekly Reports",
+          },
+          {
+            icon: "<i class='fa-solid fa-calendar-days'></i>",
+            text: "Monthly Insights",
+          },
+          {
+            icon: "<i class='fa-solid fa-chart-simple'></i>",
+            text: "Quarterly Analysis",
+          },
         ],
       },
       {
         label: "Business Intelligence",
         items: [
-          { icon: "📈", text: "Performance Metrics" },
           {
-            icon: "🔮",
+            icon: "<i class='fa-solid fa-chart-simple'></i>",
+            text: "Performance Metrics",
+          },
+          {
+            icon: "<i class='fa-solid fa-diagram-predecessor'></i>",
             text: "Predictive Analytics",
             children: [
               "Q4 Revenue Forecast: $2.4M",
@@ -71,17 +82,26 @@ const MENU_DATA = {
       {
         label: "Quick actions",
         items: [
-          { icon: "➕", text: "Create Task" },
-          { icon: "⚑", text: "Flag Task" },
-          { icon: "⏱️", text: "Add Time" },
+          { icon: "<i class='fa-solid fa-plus'></i>", text: "Create Task" },
+          { icon: "<i class='fa-solid fa-flag'></i>", text: "Flag Task" },
+          { icon: "<i class='fa-solid fa-clock'></i>", text: "Add Time" },
         ],
       },
       {
         label: "My Tasks",
         items: [
-          { icon: "☀️", text: "Due Today" },
-          { icon: "🔄", text: "In Progress" },
-          { icon: "✅", text: "Completed" },
+          {
+            icon: "<i class='fa-solid fa-note-sticky'></i>",
+            text: "Due Today",
+          },
+          {
+            icon: "<i class='fa-solid fa-bars-progress'></i>",
+            text: "In Progress",
+          },
+          {
+            icon: "<i class='fa-solid fa-circle-check'></i>",
+            text: "Completed",
+          },
         ],
       },
     ],
@@ -93,15 +113,15 @@ const MENU_DATA = {
       {
         label: "Preferences",
         items: [
-          { icon: "⚙️", text: "General" },
-          { icon: "🔔", text: "Notifications" },
+          { icon: "<i class='fa-solid fa-gear'></i>", text: "General" },
+          { icon: "<i class='fa-solid fa-bell'></i>", text: "Notifications" },
         ],
       },
       {
         label: "Account",
         items: [
-          { icon: "🔐", text: "Security" },
-          { icon: "👤", text: "Profile" },
+          { icon: "<i class='fa-solid fa-lock'></i>", text: "Security" },
+          { icon: "<i class='fa-solid fa-user'></i>", text: "Profile" },
         ],
       },
     ],
@@ -113,11 +133,19 @@ const MENU_DATA = {
       {
         label: "User",
         items: [
-          { icon: "👤", text: "View Profile" },
-          { icon: "✍️", text: "Edit" },
+          { icon: "<i class='fa-solid fa-user'></i>", text: "View Profile" },
+          { icon: "<i class='fa-solid fa-pen-to-square'></i>", text: "Edit" },
         ],
       },
-      { label: "Session", items: [{ icon: "🚪", text: "Sign out" }] },
+      {
+        label: "Session",
+        items: [
+          {
+            icon: "<i class='fa-solid fa-circle-xmark'></i>",
+            text: "Sign out",
+          },
+        ],
+      },
     ],
   },
 };
@@ -161,7 +189,7 @@ function createSection(section) {
 
     const ic = document.createElement("div");
     ic.className = "icon";
-    ic.textContent = item.icon || "•";
+    ic.innerHTML = item.icon;
     itemEl.appendChild(ic);
 
     const txt = document.createElement("div");
@@ -172,14 +200,16 @@ function createSection(section) {
     if (item.children && item.children.length) {
       const chev = document.createElement("div");
       chev.className = "chev";
-      chev.innerHTML =
-        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      chev.innerHTML = '<i class="fas fa-chevron-down"></i>';
       itemEl.appendChild(chev);
 
       // create nested container
       const nested = document.createElement("div");
       nested.className = "submenu-list collapsed";
       nested.style.marginLeft = "8px";
+      nested.style.overflow = "hidden";
+      nested.style.transition = "max-height 0.3s cubic-bezier(0.4,0,0.2,1)";
+      nested.style.maxHeight = "0";
       item.children.forEach((child) => {
         const link = document.createElement("div");
         link.className = "sub-link";
@@ -194,12 +224,21 @@ function createSection(section) {
         if (isOpen) {
           nested.classList.add("collapsed");
           itemEl.setAttribute("aria-expanded", "false");
+          nested.style.maxHeight = "0";
+          chev.innerHTML = '<i class="fas fa-chevron-down"></i>';
+          chev.classList.remove("expanded");
         } else {
           nested.classList.remove("collapsed");
           itemEl.setAttribute("aria-expanded", "true");
+          nested.style.maxHeight = nested.scrollHeight + "px";
+          chev.innerHTML = '<i class="fas fa-chevron-up"></i>';
+          chev.classList.add("expanded");
         }
       }
-      itemEl.addEventListener("click", toggleNested);
+      itemEl.addEventListener("click", (ev) => {
+        // Only toggle accordion, don't change CSS for active state
+        toggleNested(ev);
+      });
       itemEl.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter" || ev.key === " ") {
           ev.preventDefault();
@@ -210,13 +249,6 @@ function createSection(section) {
       wrap.appendChild(itemEl);
       wrap.appendChild(nested);
     } else {
-      // plain link
-      itemEl.addEventListener("click", () => {
-        // mark clicked visually
-        const prev = wrap.querySelector(".nav-item.active");
-        if (prev) prev.classList.remove("active");
-        itemEl.classList.add("active");
-      });
       list.appendChild(itemEl);
     }
   });
@@ -229,11 +261,13 @@ function createSection(section) {
   Render submenu based on key
 ---------------------------*/
 function renderSubmenu(key) {
-  const data = MENU_DATA[key] || { title: key, sections: [] };
+  const data = MENU_DATA[key];
+  //   console.log("renderSubMenu", key, data);
   subTitle.textContent = data.title || key;
   subContent.innerHTML = "";
   data.sections.forEach((sec) => {
     const secEl = createSection(sec);
+    console.log(secEl);
     subContent.appendChild(secEl);
   });
 }
@@ -244,10 +278,10 @@ function renderSubmenu(key) {
 function setActiveMain(key) {
   // update button styles
   const buttons = mainMenu.querySelectorAll(".mm-btn");
+  console.log(buttons);
   buttons.forEach((btn) => {
     btn.classList.remove("active");
-    const k = btn.dataset.key;
-    if (k === key) btn.classList.add("active");
+    if (btn.dataset.key === key) btn.classList.add("active");
   });
 
   currentMain = key;
@@ -258,7 +292,27 @@ mainMenu.addEventListener("click", (e) => {
   if (!btn) return;
   if (btn.classList.contains("disabled")) return;
   const key = btn.dataset.key;
-  if (key) setActiveMain(key);
+  if (key) {
+    setActiveMain(key);
+    // If submenu is collapsed, re-render icons for the new main menu
+    if (subCollapsed) {
+      subMenu.classList.add("collapsed");
+      subToggle.setAttribute("aria-label", "Expand sub menu");
+      const data = MENU_DATA[key];
+      subContent.innerHTML = "";
+      data.sections.forEach((sec) => {
+        const iconBar = document.createElement("div");
+        iconBar.className = "collapsed-icon-bar";
+        sec.items.forEach((item) => {
+          const ic = document.createElement("div");
+          ic.className = "collapsed-icon";
+          ic.innerHTML = item.icon || "•";
+          iconBar.appendChild(ic);
+        });
+        subContent.appendChild(iconBar);
+      });
+    }
+  }
 });
 
 /* keyboard support for main menu */
@@ -282,9 +336,25 @@ subToggle.addEventListener("click", () => {
   if (subCollapsed) {
     subMenu.classList.add("collapsed");
     subToggle.setAttribute("aria-label", "Expand sub menu");
+    // Render only icons for submenu items when collapsed
+    const data = MENU_DATA[currentMain];
+    subContent.innerHTML = "";
+    data.sections.forEach((sec) => {
+      const iconBar = document.createElement("div");
+      iconBar.className = "collapsed-icon-bar";
+      sec.items.forEach((item) => {
+        const ic = document.createElement("div");
+        ic.className = "collapsed-icon";
+        ic.innerHTML = item.icon || "•";
+        iconBar.appendChild(ic);
+      });
+      subContent.appendChild(iconBar);
+    });
   } else {
     subMenu.classList.remove("collapsed");
     subToggle.setAttribute("aria-label", "Collapse sub menu");
+    // Re-render submenu for current main menu when expanding
+    renderSubmenu(currentMain);
   }
 });
 
