@@ -162,8 +162,8 @@ const subSearch = document.getElementById("subSearch");
 const subTop = document.querySelector(".sub-top");
 const searchBar = document.querySelector(".search-bar");
 
-let currentMain = "dashboard"; // default selection
-let subCollapsed = false;
+let currentMain = "dashboard";
+let subCollapsed = true;
 
 /* -------------------------
   Helpers: create DOM for sections
@@ -204,6 +204,7 @@ function createSection(section) {
       chev.className = "chev";
       chev.innerHTML = '<i class="fas fa-chevron-down"></i>';
       itemEl.appendChild(chev);
+      const chevIcon = chev.querySelector("i");
 
       // create nested container
       const nested = document.createElement("div");
@@ -227,14 +228,14 @@ function createSection(section) {
           nested.classList.add("collapsed");
           itemEl.setAttribute("aria-expanded", "false");
           nested.style.maxHeight = "0";
-          chev.innerHTML = '<i class="fas fa-chevron-down"></i>';
-          chev.classList.remove("expanded");
+          // Remove rotation from icon
+          if (chevIcon) chevIcon.classList.remove("rotate");
         } else {
           nested.classList.remove("collapsed");
           itemEl.setAttribute("aria-expanded", "true");
           nested.style.maxHeight = nested.scrollHeight + "px";
-          chev.innerHTML = '<i class="fas fa-chevron-up"></i>';
-          chev.classList.add("expanded");
+          // Add rotation to icon
+          if (chevIcon) chevIcon.classList.add("rotate");
         }
       }
       itemEl.addEventListener("click", (ev) => {
@@ -370,7 +371,6 @@ subToggle.addEventListener("click", () => {
     if (searchBar) searchBar.classList.remove("collapsed");
     subTop.classList.remove("collapsed");
     subToggle.setAttribute("aria-label", "Collapse sub menu");
-    // Re-render submenu for current main menu when expanding
     renderSubmenu(currentMain);
   }
 });
@@ -392,3 +392,24 @@ subSearch.addEventListener("input", (e) => {
   Init
 ---------------------------*/
 setActiveMain(currentMain);
+if (subCollapsed) {
+  subMenu.classList.add("collapsed");
+  subToggle.classList.add("collapsed");
+  if (searchBar) searchBar.classList.add("collapsed");
+  subTop.classList.add("collapsed");
+  subToggle.setAttribute("aria-label", "Expand sub menu");
+  // Render only icons for submenu items when collapsed
+  const data = MENU_DATA[currentMain];
+  subContent.innerHTML = "";
+  data.sections.forEach((sec) => {
+    const iconBar = document.createElement("div");
+    iconBar.className = "collapsed-icon-bar";
+    sec.items.forEach((item) => {
+      const ic = document.createElement("div");
+      ic.className = "collapsed-icon";
+      ic.innerHTML = item.icon || "•";
+      iconBar.appendChild(ic);
+    });
+    subContent.appendChild(iconBar);
+  });
+}
