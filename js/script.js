@@ -159,6 +159,8 @@ const subTitle = document.getElementById("subTitle");
 const subContent = document.getElementById("subContent");
 const subToggle = document.getElementById("subToggle");
 const subSearch = document.getElementById("subSearch");
+const subTop = document.querySelector(".sub-top");
+const searchBar = document.querySelector(".search-bar");
 
 let currentMain = "dashboard"; // default selection
 let subCollapsed = false;
@@ -335,6 +337,9 @@ subToggle.addEventListener("click", () => {
   subCollapsed = !subCollapsed;
   if (subCollapsed) {
     subMenu.classList.add("collapsed");
+    subToggle.classList.add("collapsed");
+    if (searchBar) searchBar.classList.add("collapsed");
+    subTop.classList.add("collapsed");
     subToggle.setAttribute("aria-label", "Expand sub menu");
     // Render only icons for submenu items when collapsed
     const data = MENU_DATA[currentMain];
@@ -352,6 +357,9 @@ subToggle.addEventListener("click", () => {
     });
   } else {
     subMenu.classList.remove("collapsed");
+    subToggle.classList.remove("collapsed");
+    if (searchBar) searchBar.classList.remove("collapsed");
+    subTop.classList.remove("collapsed");
     subToggle.setAttribute("aria-label", "Collapse sub menu");
     // Re-render submenu for current main menu when expanding
     renderSubmenu(currentMain);
