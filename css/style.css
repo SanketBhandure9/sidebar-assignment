@@ -5,8 +5,7 @@
   align-items: center;
   gap: 8px;
   position: relative;
-  margin-bottom: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.06);
   padding: 10px;
   border-radius: var(--radius);
 }
@@ -51,8 +50,6 @@ body {
   justify-content: center;
   padding: 40px 0;
 }
-
-/* container to center the sidebar */
 .app {
   display: flex;
   align-items: flex-start;
@@ -132,6 +129,7 @@ body {
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
   scrollbar-color: transparent transparent;
+  /* position: relative; */
 }
 
 /* Hide scrollbar for Webkit browsers */
@@ -271,9 +269,6 @@ body {
 .submenu-list .sub-link:hover {
   background: var(--hover);
   color: var(--active);
-}
-.submenu-list.collapsed {
-  display: none;
 }
 
 /* compact collapsed sub-menu icons-only */

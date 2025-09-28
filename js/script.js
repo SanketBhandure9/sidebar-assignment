@@ -335,9 +335,14 @@ mainMenu.querySelectorAll(".mm-btn").forEach((btn) => {
 ---------------------------*/
 subToggle.addEventListener("click", () => {
   subCollapsed = !subCollapsed;
+  const subToggleIcon = document.getElementById("subToggleIcon");
   if (subCollapsed) {
     subMenu.classList.add("collapsed");
     subToggle.classList.add("collapsed");
+    if (subToggleIcon) {
+      subToggleIcon.classList.remove("fa-angle-left");
+      subToggleIcon.classList.add("fa-angle-right");
+    }
     if (searchBar) searchBar.classList.add("collapsed");
     subTop.classList.add("collapsed");
     subToggle.setAttribute("aria-label", "Expand sub menu");
@@ -358,6 +363,10 @@ subToggle.addEventListener("click", () => {
   } else {
     subMenu.classList.remove("collapsed");
     subToggle.classList.remove("collapsed");
+    if (subToggleIcon) {
+      subToggleIcon.classList.remove("fa-angle-right");
+      subToggleIcon.classList.add("fa-angle-left");
+    }
     if (searchBar) searchBar.classList.remove("collapsed");
     subTop.classList.remove("collapsed");
     subToggle.setAttribute("aria-label", "Collapse sub menu");
