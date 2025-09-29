@@ -178,7 +178,7 @@ subToggle.addEventListener("click", () => {
     if (searchBar) searchBar.classList.add("collapsed");
     subTop.classList.add("collapsed");
     subToggle.setAttribute("aria-label", "Expand sub menu");
-    // Render only icons for submenu items when collapsed
+
     const data = MENU_DATA[currentMain];
     subContent.innerHTML = "";
     data.sections.forEach((sec) => {
@@ -206,7 +206,7 @@ subToggle.addEventListener("click", () => {
   }
 });
 
-// Simple search (client-side)
+// Simple search
 subSearch.addEventListener("input", (e) => {
   const q = e.target.value.trim().toLowerCase();
   const links = subContent.querySelectorAll(".nav-item, .sub-link");
@@ -223,7 +223,7 @@ if (subCollapsed) {
   if (searchBar) searchBar.classList.add("collapsed");
   subTop.classList.add("collapsed");
   subToggle.setAttribute("aria-label", "Expand sub menu");
-  // Render only icons for submenu items when collapsed
+
   const data = MENU_DATA[currentMain];
   subContent.innerHTML = "";
   data.sections.forEach((sec) => {
@@ -238,4 +238,5 @@ if (subCollapsed) {
     subContent.appendChild(iconBar);
   });
 }
+
 setActiveMain(currentMain);
