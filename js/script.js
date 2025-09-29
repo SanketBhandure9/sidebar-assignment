@@ -1,8 +1,6 @@
 import MENU_DATA from "./data.js";
 
-/* -------------------------
-  Elements and initial state
----------------------------*/
+// Elements and initial state
 const mainMenu = document.getElementById("mainMenu");
 const subMenu = document.getElementById("subMenu");
 const subTitle = document.getElementById("subTitle");
@@ -15,9 +13,7 @@ const searchBar = document.querySelector(".search-bar");
 let currentMain = "dashboard";
 let subCollapsed = true;
 
-/* -------------------------
-  Helpers: create DOM for sections
----------------------------*/
+// Create DOM for sections
 function createSection(section) {
   const wrap = document.createElement("div");
   wrap.className = "section";
@@ -72,29 +68,26 @@ function createSection(section) {
       });
 
       // toggle nested on click
-      function toggleNested(e) {
+      function toggleNested() {
         const isOpen = !nested.classList.contains("collapsed");
         if (isOpen) {
           nested.classList.add("collapsed");
           itemEl.setAttribute("aria-expanded", "false");
           nested.style.maxHeight = "0";
-          // Remove rotation from icon
           if (chevIcon) chevIcon.classList.remove("rotate");
         } else {
           nested.classList.remove("collapsed");
           itemEl.setAttribute("aria-expanded", "true");
           nested.style.maxHeight = nested.scrollHeight + "px";
-          // Add rotation to icon
           if (chevIcon) chevIcon.classList.add("rotate");
         }
       }
-      itemEl.addEventListener("click", (ev) => {
-        // Only toggle accordion, don't change CSS for active state
-        toggleNested(ev);
+      itemEl.addEventListener("click", (event) => {
+        toggleNested(event);
       });
-      itemEl.addEventListener("keydown", (ev) => {
-        if (ev.key === "Enter" || ev.key === " ") {
-          ev.preventDefault();
+      itemEl.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
           toggleNested();
         }
       });
@@ -110,9 +103,7 @@ function createSection(section) {
   return wrap;
 }
 
-/* -------------------------
-  Render submenu based on key
----------------------------*/
+// Render submenu
 function renderSubmenu(key) {
   const data = MENU_DATA[key];
   subTitle.textContent = data.title || key;
@@ -123,11 +114,8 @@ function renderSubmenu(key) {
   });
 }
 
-/* -------------------------
-  Wiring main menu clicks
----------------------------*/
+// Wiring main menu clicks
 function setActiveMain(key) {
-  // update button styles
   const buttons = mainMenu.querySelectorAll(".mm-btn");
   buttons.forEach((btn) => {
     btn.classList.remove("active");
@@ -144,7 +132,6 @@ mainMenu.addEventListener("click", (e) => {
   const key = btn.dataset.key;
   if (key) {
     setActiveMain(key);
-    // If submenu is collapsed, re-render icons for the new main menu
     if (subCollapsed) {
       subMenu.classList.add("collapsed");
       subToggle.setAttribute("aria-label", "Expand sub menu");
@@ -165,7 +152,6 @@ mainMenu.addEventListener("click", (e) => {
   }
 });
 
-/* keyboard support for main menu */
 mainMenu.querySelectorAll(".mm-btn").forEach((btn) => {
   if (btn.classList.contains("disabled")) return;
   btn.tabIndex = 0;
@@ -178,9 +164,7 @@ mainMenu.querySelectorAll(".mm-btn").forEach((btn) => {
   });
 });
 
-/* -------------------------
-  Submenu collapse/expand
----------------------------*/
+// Submenu collapse/expand
 subToggle.addEventListener("click", () => {
   subCollapsed = !subCollapsed;
   const subToggleIcon = document.getElementById("subToggleIcon");
@@ -222,9 +206,7 @@ subToggle.addEventListener("click", () => {
   }
 });
 
-/* -------------------------
-  Simple search (client-side)
----------------------------*/
+// Simple search (client-side)
 subSearch.addEventListener("input", (e) => {
   const q = e.target.value.trim().toLowerCase();
   const links = subContent.querySelectorAll(".nav-item, .sub-link");
@@ -235,10 +217,6 @@ subSearch.addEventListener("input", (e) => {
   });
 });
 
-/* -------------------------
-  Init
----------------------------*/
-setActiveMain(currentMain);
 if (subCollapsed) {
   subMenu.classList.add("collapsed");
   subToggle.classList.add("collapsed");
@@ -260,3 +238,4 @@ if (subCollapsed) {
     subContent.appendChild(iconBar);
   });
 }
+setActiveMain(currentMain);
