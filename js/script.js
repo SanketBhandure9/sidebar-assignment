@@ -217,6 +217,25 @@ subSearch.addEventListener("input", (e) => {
   });
 });
 
+// Theme toggle logic
+function setTheme(theme) {
+  document.body.classList.remove("light", "dark");
+  document.body.classList.add(theme);
+}
+
+setTheme("dark");
+
+const themeToggleBtn = document.querySelector(".theme-toggle");
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    if (document.body.classList.contains("dark")) {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  });
+}
+
 if (subCollapsed) {
   subMenu.classList.add("collapsed");
   subToggle.classList.add("collapsed");
