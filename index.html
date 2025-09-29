@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sidebar UI</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -13,10 +12,8 @@
   </head>
   <body>
     <div class="app" role="application" aria-label="Sidebar demo">
-      <!-- MAIN MENU -->
       <nav class="main-menu" aria-label="Main menu" id="mainMenu">
         <div class="group top-group" role="group" aria-label="Top icons">
-          <!-- first icon - display-only -->
           <button
             class="mm-btn-first disabled"
             aria-hidden="true"
@@ -24,8 +21,6 @@
           >
             <i class="fa-solid fa-cube"></i>
           </button>
-
-          <!-- dashboard -->
           <button
             class="mm-btn"
             data-key="dashboard"
@@ -34,8 +29,6 @@
           >
             <i class="fa-solid fa-chart-pie"></i>
           </button>
-
-          <!-- tasks -->
           <button
             class="mm-btn"
             data-key="tasks"
@@ -47,7 +40,6 @@
         </div>
 
         <div class="bottom-group" role="group" aria-label="Bottom icons">
-          <!-- settings -->
           <button
             class="mm-btn"
             data-key="settings"
@@ -56,8 +48,6 @@
           >
             <i class="fa-solid fa-gear"></i>
           </button>
-
-          <!-- profile -->
           <button
             class="mm-btn"
             data-key="profile"
@@ -69,7 +59,6 @@
         </div>
       </nav>
 
-      <!-- SUB MENU -->
       <aside class="sub-menu" id="subMenu" aria-label="Sub menu">
         <div class="sub-top-header">
           <div class="sub-top">
@@ -93,9 +82,7 @@
             />
           </div>
         </div>
-        <div id="subContent">
-          <!-- content is injected via JS depending on selection -->
-        </div>
+        <div id="subContent"></div>
       </aside>
     </div>
 

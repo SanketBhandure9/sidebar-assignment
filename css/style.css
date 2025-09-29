@@ -36,7 +36,6 @@ body {
   margin: auto;
 }
 
-/* main menu (left narrow vertical) */
 .main-menu {
   background: var(--panel);
   width: 56px;
@@ -94,7 +93,6 @@ body {
   align-items: center;
 }
 
-/* sub menu */
 .sub-menu {
   background: var(--panel);
   width: 260px;
@@ -110,7 +108,6 @@ body {
   border-bottom-right-radius: var(--radius);
 }
 
-/* Hide scrollbar for Webkit browsers */
 .sub-menu::-webkit-scrollbar {
   width: 0px;
   background: transparent;
@@ -164,8 +161,6 @@ body {
 .sub-toggle {
   transition: transform 0.3s ease;
 }
-
-/* Rotated state (down arrow) */
 .sub-toggle.rotate {
   transform: rotate(180deg);
 }
@@ -184,7 +179,7 @@ body {
   border-color: rgba(255, 255, 255, 0.08);
   color: var(--active);
 }
-/* Search bar with icon for expanded submenu */
+
 .search-bar {
   display: flex;
   justify-content: center;
@@ -219,7 +214,6 @@ body {
   margin: 6px 0 4px 0;
 }
 
-/* nav item */
 .nav-item {
   display: flex;
   align-items: center;
@@ -248,7 +242,6 @@ body {
   transform: rotate(180deg);
 }
 
-/* nested list inside a section (accordion) */
 .submenu-list {
   display: flex;
   flex-direction: column;
@@ -267,7 +260,6 @@ body {
   color: var(--active);
 }
 
-/* compact collapsed sub-menu icons-only */
 .sub-menu.collapsed .sub-title,
 .sub-menu.collapsed .search,
 .sub-menu.collapsed .label,
