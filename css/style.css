@@ -1,10 +1,8 @@
 :root {
-  --bg: #ffffff;
   --panel: #0f0f0f;
   --muted: #747474;
   --hover: #bababa;
   --active: #282828;
-  --accent: #2b2b2b;
   --text: #a6a6a6;
   --radius: 12px;
   --transition: 200ms;
