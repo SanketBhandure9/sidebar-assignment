@@ -1,8 +1,10 @@
 :root {
+  --bg: #ffffff;
   --panel: #0f0f0f;
   --muted: #747474;
   --hover: #bababa;
   --active: #282828;
+  --accent: #2b2b2b;
   --text: #a6a6a6;
   --radius: 12px;
   --transition: 200ms;
@@ -23,7 +25,6 @@ body {
   justify-content: center;
   color: #e7e7e7;
 }
-
 .app {
   display: flex;
   align-items: flex-start;
@@ -35,6 +36,7 @@ body {
   margin: auto;
 }
 
+/* main menu (left narrow vertical) */
 .main-menu {
   background: var(--panel);
   width: 56px;
@@ -97,13 +99,13 @@ body {
   background: var(--panel);
   width: 260px;
   height: 100%;
-  padding: 0 14px 14px 14px; /* Remove top padding so sticky header covers the top */
+  padding: 0 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  /* transition: width var(--transition); */
+  transition: width var(--transition);
   overflow-y: auto;
   overflow-x: hidden;
-  /* scrollbar-width: none; */
-  /* scrollbar-color: transparent transparent; */
   border-top-right-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
 }
@@ -170,7 +172,7 @@ body {
 .search {
   display: block;
   width: 100%;
-  padding: 6px 10px;
+  padding: 6px 10;
   border-radius: 10px;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -237,7 +239,7 @@ body {
 .nav-item .chev {
   margin-left: auto;
   opacity: 0.6;
-  font-size: var(--font-size);
+  font-size: 12px;
 }
 .nav-item .chev i.fa-chevron-down {
   transition: transform 0.3s cubic-bezier(0.77, 0, 0.175, 1);

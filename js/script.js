@@ -265,12 +265,10 @@ function createSection(section) {
 ---------------------------*/
 function renderSubmenu(key) {
   const data = MENU_DATA[key];
-  //   console.log("renderSubMenu", key, data);
   subTitle.textContent = data.title || key;
   subContent.innerHTML = "";
   data.sections.forEach((sec) => {
     const secEl = createSection(sec);
-    console.log(secEl);
     subContent.appendChild(secEl);
   });
 }
@@ -281,7 +279,6 @@ function renderSubmenu(key) {
 function setActiveMain(key) {
   // update button styles
   const buttons = mainMenu.querySelectorAll(".mm-btn");
-  console.log(buttons);
   buttons.forEach((btn) => {
     btn.classList.remove("active");
     if (btn.dataset.key === key) btn.classList.add("active");
